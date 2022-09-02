@@ -1,4 +1,23 @@
 
 *{
     font-family: 'Roboto', sans-serif;
+    list-style: none;
+
 }
+ 
+ header{
+    border-bottom: 3px solid rgb(221, 218, 218);
+  
+   
+ }
+ .nav-link:hover{
+        color: blue !important;
+      border-bottom: 2px solid blue;
+ }
+ .data-color {
+    color: #A4A4A5;
+    
+ }
+ .news-color:hover{
+     color: blue;
+ }
