@@ -15,15 +15,12 @@ const showCategory= async() =>{
     const{news_category} = data;
    
 
- 
-       
-        
-   const categorySection = document.getElementById('category-section');
+ const categorySection = document.getElementById('category-section');
 
        
    news_category.forEach(singleData => {
        const{category_id, category_name}=singleData;
-      //  console.log(category_id);
+  
      const div =document.createElement('div');
     
       div.classList.add('mx-auto');
@@ -33,7 +30,7 @@ const showCategory= async() =>{
      
       <ul>
  
-   <li onclick="newsDetails('${category_id}')" >${category_name ?category_name : 'Not Found'}</li>
+   <li onclick="AllnewsDetails('${category_id ? category_id : 'Empty'}')" >${category_name ?category_name : 'Not Found'}</li>
        
   </ul>
    `;
@@ -48,13 +45,14 @@ showCategory()
 
 
 
-const newsDetails= async(category_id)=>{
+const AllnewsDetails= async(category_id)=>{
    const url=`https://openapi.programming-hero.com/api/news/category/${category_id ? category_id : 'Empty'}`;
-   console.log(url);
+  
  fetch(url)
  .then(res =>res.json())
  .then(newsId=>displayNewsDetails(newsId))
 
+ 
     
    
 
@@ -62,84 +60,118 @@ const newsDetails= async(category_id)=>{
 }
 
 const displayNewsDetails = async(newsId)=>{
+ 
   
-     console.log(newsId);
-      const{data}= newsId;
+ const{data}= newsId;
+ 
 
    const newsDetails = document.getElementById('news-Details');
 
-   newsDetails.innerHTML= '';
+   newsDetails.innerHTML= ' ';
     
     
     data.forEach(news =>{
-      
-      const{image_url, details, thumbnail_url, rating, title,author} =news;
+       
+      const{image_url, details, rating, title, author, category_id} =news;
  
-   const{name, published_date, img}=author;
+       const{name, published_date, img}=author;
 
-    const div = document.createElement('div');
-    div.innerHTML=`
-    <div class="card mb-3 pb-5" >
-    <div class="row g-4">
-      <div class="col-md-4 ">
-        <img src="${image_url}" class="img-fluid rounded-start w-100 h-100" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
+       const div = document.createElement('div');
+       div.innerHTML=`
+       <div class="card mb-3 pb-2" >
+          <div class="row g-0">
+          <div class="col-md-4 ">
+         <img src="${image_url}" class="img-fluid rounded-start w-100 h-100" alt="...">
+        
+        </div>
+         <div class="col-md-8">
+         <div class="card-body">
           <h4 class="card-title">${title ? title : 'Not Found'}</h4>
-          <p class="card-text">${details ? details.slice(0, 200) : 'not found'}</p>
+          <p class="card-text">${details ? details.slice(0, 300) : 'not found'}</p>
            
         
-      <div class="d-flex align-items-end justify-content-around">
+         <div class=" row d-flex">
           
-      <div class="d-flex align-items-center">
-          <img src="${img}" class="img-fluid rounded-circle w-25 h-25" alt="...">
-
-          <div>
+      <div class="col-4 d-flex">
+        <div>
+      <img src="${img}" class="img-fluid rounded-circle w-100 h-50" alt="...">
+ 
+        </div>
+       
+          <div class="">
               <p>${name}</p>
               <p>${published_date}</p>
-          </div>
-
-         
+              
+          </div>    
       </div>
 
-      <div>
-          <p>${rating.number}</p>
-      </div>
+    <div class="col-4">
+            <p p>${rating.number} M</p>
+         </div>
+       
+    <div class="col-4">
+        <button onclick="showModal('${category_id}')" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" > Show More </button>
 
-      <div>
-          <button class="btn btn-outline-dark">Show More</button>
-      </div>
-
-
-</div>
-        
-          
-
-         
-        </div>
+    </div>
+ </div>
+         </div>
       </div>
     </div>
   </div>
 
-  
 
-
-    
     `;
 
       
     newsDetails.appendChild(div);
     
-     
-    
+      
     })
     
-
-     
-       
+           
 }    
  
+const showModal =  ( category_id) =>{
+    
 
- newsDetails();
-loadNews(); 
+   const url=`https://openapi.programming-hero.com/api/news/category/${category_id?category_id:'Empty'}`;
+
+    fetch(url)
+    .then(res=>res.json())
+    .then(dataNews =>displayShowModal(dataNews.data))
+
+           
+   
+
+}
+
+const displayShowModal =(dataNews) =>{
+  
+   dataNews.forEach(newsModal =>{
+      console.log(newsModal);
+      const{image_url, details, rating, title, author} =newsModal;
+
+      const{name, published_date, img}=author;
+
+      const modalTitle=document.getElementById('exampleModalLabel');
+       modalTitle.innerText= title ? title : 'no data found';
+       const newsBody =document.getElementById('news-body');
+       newsBody.innerHTML=`
+
+       <div class="card"  >
+  <img src="${image_url}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h3 class="card-title"> ${name ? name : 'no data found'}</h3>
+           
+    <p class="card-text">${details.slice(0, 100) ? details.slice(0, 100) : 'no data found'}</p
+  
+  </div>
+</div>
+       `;
+ 
+   })
+ 
+}
+
+ AllnewsDetails(' ');
+loadNews(' '); 
