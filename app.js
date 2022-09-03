@@ -79,9 +79,9 @@ const displayNewsDetails = async(newsId)=>{
 
     const div = document.createElement('div');
     div.innerHTML=`
-    <div class="card mb-3" >
-    <div class="row g-0">
-      <div class="col-md-4">
+    <div class="card mb-3 pb-5" >
+    <div class="row g-4">
+      <div class="col-md-4 ">
         <img src="${image_url}" class="img-fluid rounded-start w-100 h-100" alt="...">
       </div>
       <div class="col-md-8">
@@ -121,6 +121,10 @@ const displayNewsDetails = async(newsId)=>{
       </div>
     </div>
   </div>
+
+  
+
+
     
     `;
 
