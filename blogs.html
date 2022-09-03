@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Bangla News</title>
+    <link rel="shortcut icon"
+        href="https://image.shutterstock.com/image-illustration/letter-b-3d-clean-red-260nw-1104382721.jpg"
+        type="image/x-icon">
+    <!-- google font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+ 
+    <a href="http://" rel="noopener noreferrer"></a>
+    <!-- vanila css  -->
+    <link rel="stylesheet" href="style.css">
+    <!-- bootstrap css  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container bg-light m-pb-5 ">
+
+        <!-- header section design starts here  -->
+        <header>
+            <nav class="navbar navbar-light bg-light mb-2">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-capitalize fs-1 fw-bold">the daily bangla news</a>
+
+
+
+                    <div class="d-flex nav-color">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-row gap-4">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="">News</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  target="_blank"  href="#blogs">Blogs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </nav>
+        </header>
+
+        <!-- header section design ends here  -->
+
+        <main>
+            
+                   <!-- blogs section design  -->
+
+                   <section id="blogs">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              <h3 class="text-capitalize">what is the different among var let const in js ?</h3>
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                             <p>var variables can be updated and re-daclared in function. let variables can be updated but not  re-declared and const varialbes can neither be updated or redeclared </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            
+                              <h3 class="text-capitalize">what is the different between arrow function and regular function in js ?</h3>
+                            </button>
+
+                          </h2>
+                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              <p> arrow function is a new features in ES6. regular function is a old featurs in EX6.
+                               arrow function do not have argument. regular function have an argument. regular functions created using function declarations or expressions are constructible and callable. and arrow functions are only callable and not constructible.
+                             
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                              <h3 class="text-capitalize">why we use template string in js ?</h3>
+                            </button>
+                          </h2>
+                          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                           <p>template strings are a pogerful feature of modern javaScript released in ES6.it lets us insert variables and expressions into sTrings without needingto concatenate. it create strings that are complex and contain dynamic clements.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                   </section>
+                   <!-- blogs section design  -->
+            <!-- category section start -->
+
+ 
+           
+
+                 
+
+                 
+
+
+            
+      </main>
+
+  </div>
+
+
+
+
+    <footer class=" fixed-bottom bg-light  p-3   ">
+ 
+        <div class="align ">
+            <p class="text-center">&copy; copyright 2022 The Daily Bangla News</p>
+      
+        </div>
+      
+      </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- bundle  js  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
