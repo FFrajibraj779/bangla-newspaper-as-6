@@ -1,97 +1,81 @@
-
 const loadNews = async () => {
-   const url = `https://openapi.programming-hero.com/api/news/categories`;
-   const res = await fetch(url);
-   const data = await res.json();
+  const url = `https://openapi.programming-hero.com/api/news/categories`;
+  const res = await fetch(url);
+  const data = await res.json();
   return data.data;
- 
-}
+};
 
+const showCategory = async () => {
+  const data = await loadNews();
 
+  const { news_category } = data;
 
-const showCategory = async ( ) => {
+  const categorySection = document.getElementById("category-section");
 
-   const data = await loadNews();
+  news_category.forEach((singleData) => {
+    const { category_id, category_name } = singleData;
 
-   const { news_category } = data;
+    const div = document.createElement("div");
 
- const categorySection = document.getElementById('category-section');
-                  news_category.forEach(singleData => {
-      const { category_id, category_name } = singleData;
+    div.classList.add("mx-auto");
+    div.classList.add("news-color");
 
-      const div = document.createElement('div');
-
-      div.classList.add('mx-auto');
-      div.classList.add('news-color');
-
-      div.innerHTML = `
+    div.innerHTML = `
       <ul>
  
-   <li onclick="AllnewsDetails('${category_id ? category_id : 'Empty'}')" >${category_name ? category_name : 'Not Found'}</li>
+   <li onclick="AllnewsDetails('${category_id ? category_id : "Empty"}')" >${
+      category_name ? category_name : "Not Found"
+    }</li>
        
   </ul>
    `;
-      categorySection.appendChild(div);
- 
-   
-   });
+    categorySection.appendChild(div);
+  });
+};
 
-
-  
-}
-
-
-showCategory( '');
+showCategory("");
 
 const AllnewsDetails = async (category_id) => {
-   const url = `https://openapi.programming-hero.com/api/news/category/${category_id ? category_id : 'Empty'}`;
+  const url = `https://openapi.programming-hero.com/api/news/category/${
+    category_id ? category_id : "Empty"
+  }`;
 
-       fetch(url)
-      .then(res => res.json())
-      .then(newsId => displayNewsDetails(newsId))
+  fetch(url)
+    .then((res) => res.json())
+    .then((newsId) => displayNewsDetails(newsId));
 
-   
-   //start loader
- 
-
-}
+  //start loader
+};
 
 const displayNewsDetails = async (newsId) => {
+  const { data } = newsId;
 
-   const { data } = newsId;
-   
-   const newsDetails = document.getElementById('news-Details');
-     
+  const newsDetails = document.getElementById("news-Details");
+  newsDetails.innerHTML = " ";
 
-   newsDetails.innerHTML = ' ';
+  data.forEach((news) => {
+    toggleSnippers(true);
 
-   // const newsField = document.getElementById('news-field');
-   //      console.log(newsField);
+    const { image_url, details, rating, title, author, category_id } = news;
 
-   // console.log(newsFieldValue.value);
+    const { name, published_date, img } = author;
 
-
-
-   data.forEach(news => {
-
-      toggleSnippers(true);
-
-      const { image_url, details, rating, title, author, category_id } = news;
-
-      const { name, published_date, img } = author;
-
-      const div = document.createElement('div');
-      div.innerHTML = `
+    const div = document.createElement("div");
+    div.innerHTML = `
        <div class="card mb-3 pb-2" >
           <div class="row g-0">
           <div class="col-md-4 ">
-         <img src="${image_url ? image_url : 'no image found'}" class="img-fluid rounded-start w-100 h-100" alt="...">
+         <img src="${
+           image_url ? image_url : "no image found"
+         }" class="img-fluid rounded-start w-100 h-100" alt="...">
         
         </div>
          <div class="col-md-8">
          <div class="card-body">
-          <h4 class="card-title">${title ? title : 'Not Found'}</h4>
-          <p class="card-text">${details ? details.slice(0, 300) : 'not found'}</p>
+          <h4 class="card-title">${title ? title : "Not Found"}</h4>
+          <p class="card-text">${
+            details ? details.slice(0, 300) : "not found"
+          }</p>
            
         
          <div class=" row d-flex">
@@ -126,82 +110,59 @@ const displayNewsDetails = async (newsId) => {
 
     `;
 
-
-      newsDetails.appendChild(div);
-
-
-   });
-
- 
-   toggleSnippers(false);
-}
-
-
-
-
+    newsDetails.appendChild(div);
+  });
+};
 
 const showModal = (category_id) => {
+  const url = `https://openapi.programming-hero.com/api/news/category/${
+    category_id ? category_id : "Empty"
+  }`;
 
-      const url = `https://openapi.programming-hero.com/api/news/category/${category_id ? category_id : 'Empty'}`;
-
-      fetch(url)
-      .then(res => res.json())
-      .then(dataNews => displayShowModal(dataNews.data))
-
-  
-
-
-}
+  fetch(url)
+    .then((res) => res.json())
+    .then((dataNews) => displayShowModal(dataNews.data));
+};
 
 const displayShowModal = (dataNews) => {
+  dataNews.forEach((newsModal) => {
+    const { image_url, details, rating, title, author, total_view } = newsModal;
 
-          console.log(dataNews);
-      dataNews.forEach(newsModal => {
-    
-      const { image_url, details, rating, title, author, total_view
-      } = newsModal;
+    const { name, published_date, img } = author;
 
-      const { name, published_date, img } = author;
-
-      const modalTitle = document.getElementById('exampleModalLabel');
-      modalTitle.innerText = title ? title : 'no data found';
-      const newsBody = document.getElementById('news-body');
-      newsBody.innerHTML = `
+    const modalTitle = document.getElementById("exampleModalLabel");
+    modalTitle.innerText = title ? title : "no data found";
+    const newsBody = document.getElementById("news-body");
+    newsBody.innerHTML = `
 
        <div class="card"  >
     <img src="${image_url}" class="card-img-top" alt="...">
      <div class="card-body">
-     <h3 class="card-title"> ${name ? name : 'no data found'}</h3>
+     <h3 class="card-title"> ${name ? name : "no data found"}</h3>
            
-     <p class="card-text">${details.slice(0, 100) ? details.slice(0, 100) : 'no data found'}</p
-     <p>View: ${total_view ? total_view : 'data not found'}</p>
-     <p> Author: ${name ? name :'data not found'}</p>
+     <p class="card-text">${
+       details.slice(0, 100) ? details.slice(0, 100) : "no data found"
+     }</p
+     <p>View: ${total_view ? total_view : "data not found"}</p>
+     <p> Author: ${name ? name : "data not found"}</p>
       
   
     </div>
     </div>
        `;
+  });
+  toggleSnippers(false);
+};
 
-   })
+const toggleSnippers = (isloading) => {
+  const loaderSnippers = document.getElementById("loader");
 
-}
+  if (isloading) {
+    loaderSnippers.classList.remove("d-none");
+  } else {
+    loaderSnippers.classList.add("d-none");
+  }
+};
 
-
-
-const toggleSnippers = isloading => {
-
-   const loaderSnippers = document.getElementById('loader');
-   
-
-   if (isloading) {
-      loaderSnippers.classList.remove('d-none');
-   }
- else{
-   loaderSnippers.classList.add('d-none');
- }
-}
- 
-
- 
-AllnewsDetails(' ');
-loadNews(' '); 
+AllnewsDetails("");
+loadNews(" ");
